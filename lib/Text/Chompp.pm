@@ -31,6 +31,10 @@ our @EXPORT_OK = qw/ chompp chopp /;
 
 =head1 DESCRIPTON
 
+Alternative to the builtins C<chop> and C<chomp>, which leave the original
+intact, and instead return the altered value. The intention is to take the
+same arguments as the originals.
+
 =cut
 
 sub chompp {
@@ -48,6 +52,12 @@ sub chopp {
     chop foreach @val;
     return wantarray ? @val : $val[0];
 }
+
+=head1 SEE ALSO
+
+Text::Chomped - requires alternative syntax for lists
+
+=cut
 
 1;
 
