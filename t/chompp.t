@@ -25,6 +25,14 @@ my @tests = (
         },
         result => [ "hello", "there" ],
     },
+    {   name => 'foreach',
+        sub  => sub {
+            my @chompped;
+            push @chompped, chompp foreach ( "hello\n", "there\n" );
+            return \@chompped;
+        },
+        result => [ "hello", "there" ],
+    },
 
 );
 
