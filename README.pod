@@ -29,7 +29,7 @@ version 0.001
    
   # ... etc ...
 
-=head1 DESCRIPTON
+=head1 DESCRIPTION
 
 Alternative to the builtins C<chop> and C<chomp>, which leave the original
 intact, and instead return the altered value. The intention is to take the

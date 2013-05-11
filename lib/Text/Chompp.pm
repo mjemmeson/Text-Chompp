@@ -1,14 +1,14 @@
 package Text::Chompp;
 
-# ABSTRACT: chomp and chop replacements that pass the changed value(s) back
-
-# VERSION
-
 use warnings;
 use strict;
 
 use base 'Exporter';
 our @EXPORT_OK = qw/ chompp chopp /;
+
+# ABSTRACT: chomp and chop replacements that pass the changed value(s) back
+
+# VERSION
 
 =head1 SYNOPSIS
 
@@ -29,11 +29,15 @@ our @EXPORT_OK = qw/ chompp chopp /;
    
   # ... etc ...
 
-=head1 DESCRIPTON
+=head1 DESCRIPTION
 
 Alternative to the builtins C<chop> and C<chomp>, which leave the original
 intact, and instead return the altered value. The intention is to take the
 same arguments as the originals.
+
+=head1 LIMITATIONS
+
+Text::Chompp will not process the values of hashes (as chop/chomp do).
 
 =cut
 
