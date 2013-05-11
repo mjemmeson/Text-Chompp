@@ -35,6 +35,10 @@ Alternative to the builtins C<chop> and C<chomp>, which leave the original
 intact, and instead return the altered value. The intention is to take the
 same arguments as the originals.
 
+=head1 LIMITATIONS
+
+Text::Chompp will not process the values of hashes (as chop/chomp do).
+
 =head1 SEE ALSO
 
 Text::Chomped - requires alternative syntax for lists
@@ -61,10 +65,6 @@ L<https://github.com/mjemmeson/text-chompp>
 =head1 AUTHOR
 
 Michael Jemmeson <mjemmeson@cpan.org>
-
-=head1 CONTRIBUTOR
-
-Michael Jemmeson <michael.jemmeson@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 

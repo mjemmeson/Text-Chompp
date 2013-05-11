@@ -77,9 +77,6 @@
          "web" : "https://github.com/mjemmeson/text-chompp"
       }
    },
-   "version" : "0.001",
-   "x_contributors" : [
-      "Michael Jemmeson <michael.jemmeson@gmail.com>"
-   ]
+   "version" : "0.001"
 }
 
