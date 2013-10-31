@@ -4,52 +4,60 @@ use Test::Most;
 
 use Text::Chompp qw/ chompp /;
 
-my @tests = (
-    {   name   => 'scalar',
-        sub    => sub { chompp "hello\n" },
-        result => "hello",
-    },
-    {   name => 'list',
-        sub  => sub { [ chompp "hello\n", "there\n" ] },
-        result => [ "hello", "there" ],
-    },
-    {   name => 'map',
-        sub  => sub {
-            [ map {chompp} "hello\n", "there\n" ];
+foreach my $words ( [ "hello\n", "there\n" ], [ "hello", "there" ] ) {
+
+    note $words->[0] =~ /\n$/ ? "with new line" : "without new line";
+
+    my @chomped = map { s/\n$//; $_ } @{$words};
+
+    my @tests = (
+        {   name   => 'scalar',
+            sub    => sub { chompp $words->[0] },
+            result => $chomped[0],
         },
-        result => [ "hello", "there" ],
-    },
-    {   name => 'map with $_',
-        sub  => sub {
-            [ map { chompp $_ } "hello\n", "there\n" ];
+        {   name   => 'list',
+            sub    => sub { [ chompp $words->[0], $words->[1] ] },
+            result => [@chomped],
         },
-        result => [ "hello", "there" ],
-    },
-    {   name => 'foreach',
-        sub  => sub {
-            my @chompped;
-            push @chompped, chompp foreach ( "hello\n", "there\n" );
-            return \@chompped;
+        {   name => 'map',
+            sub  => sub {
+                [ map {chompp} $words->[0], $words->[1] ];
+            },
+            result => [@chomped],
         },
-        result => [ "hello", "there" ],
-    },
+        {   name => 'map with $_',
+            sub  => sub {
+                [ map { chompp $_ } $words->[0], $words->[1] ];
+            },
+            result => [@chomped],
+        },
+        {   name => 'foreach',
+            sub  => sub {
+                my @chompped;
+                push @chompped, chompp foreach ( $words->[0], $words->[1] );
+                return \@chompped;
+            },
+            result => [@chomped],
+        },
 
-);
+    );
 
-foreach my $test (@tests) {
+    foreach my $test (@tests) {
 
-    note $test->{name};
+        note $test->{name};
 
-    is_deeply $test->{sub}->(), $test->{result}, "result ok";
+        is_deeply $test->{sub}->(), $test->{result}, "result ok";
+    }
+
+    note "testing input unchanged";
+
+    my $input = $words->[0];
+    ok my $output = chompp($input), "chompp";
+
+    is $input, $words->[0], "input unchanged";
+    is $output, $chomped[0], "output chompped";
+
 }
-
-note "testing input unchanged";
-
-my $input = "hello\n";
-ok my $output = chompp($input), "chompp";
-
-is $input,  "hello\n", "input unchanged";
-is $output, "hello",   "output chompped";
 
 done_testing();
 

@@ -21,6 +21,14 @@ my @tests = (
         sub    => sub { [ map { chopp $_ } "hello\n", "there\n" ] },
         result => [ "hello", "there" ],
     },
+    {   name => 'foreach',
+        sub  => sub {
+            my @chopped;
+            push @chopped, chopp foreach ( "hello\n", "there\n" );
+            return \@chopped;
+        },
+        result => [ "hello", "there" ],
+    },
 
 );
 
