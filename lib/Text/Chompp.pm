@@ -23,8 +23,7 @@ our @EXPORT_OK = qw/ chompp chopp /;
   my @chomped = chompp @strings;
   
   foreach (<FILE>) {
-    chompp;
-    push @chomped;
+    push @chomped, chompp;
   }
    
   # ... etc ...
